@@ -2,8 +2,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ACME.LearningCenterPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 
+/// <summary>
+/// Provides extension methods for ModelBuilder to configure naming conventions.
+/// </summary>
 public static class ModelBuilderExtensions
 {
+    /// <summary>
+    /// Applies snake_case naming convention to all entities, properties, keys, foreign keys, and indexes in the model.
+    /// </summary>
+    /// <param name="builder">The model builder to configure.</param>
     public static void UseSnakeCaseNamingConvention(this ModelBuilder builder)
     {
         foreach (var entity in builder.Model.GetEntityTypes())
