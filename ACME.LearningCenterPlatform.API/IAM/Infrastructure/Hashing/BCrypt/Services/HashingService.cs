@@ -3,33 +3,28 @@ using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace ACME.LearningCenterPlatform.API.IAM.Infrastructure.Hashing.BCrypt.Services;
 
-/**
- * <summary>
- *     This class is responsible for hashing and validating passwords.
- * </summary>
- */
+/// <summary>
+///     Responsible for hashing and verifying passwords using the BCrypt algorithm.
+/// </summary>
 public class HashingService : IHashingService
 {
-    /**
-     * <summary>
-     *     This method hashes a password.
-     * </summary>
-     * <param name="password">The password to passwordHash.</param>
-     * <returns>The hashed password.</returns>
-     */
+    /// <summary>
+    ///     Hashes the provided <paramref name="password"/> using BCrypt.
+    /// </summary>
+    /// <param name="password">The plain-text password to hash.</param>
+    /// <returns>The BCrypt hashed password string that can be stored.</returns>
     public string HashPassword(string password)
     {
         return BCryptNet.HashPassword(password);
     }
 
-    /**
-     * <summary>
-     *     This method validates a password against a passwordHash.
-     * </summary>
-     * <param name="password">The password to validate.</param>
-     * <param name="passwordHash">The passwordHash to validate against.</param>
-     * <returns>True if the password is valid, false otherwise.</returns>
-     */
+    /// <summary>
+    ///     Verifies that the provided plain-text <paramref name="password"/> matches the stored
+    ///     BCrypt <paramref name="passwordHash"/>.
+    /// </summary>
+    /// <param name="password">The plain-text password to verify.</param>
+    /// <param name="passwordHash">The BCrypt hash to verify against.</param>
+    /// <returns><c>true</c> if the password matches the hash; otherwise <c>false</c>.</returns>
     public bool VerifyPassword(string password, string passwordHash)
     {
         return BCryptNet.Verify(password, passwordHash);

@@ -9,25 +9,23 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ACME.LearningCenterPlatform.API.IAM.Infrastructure.Tokens.JWT.Services;
 
-/**
- * <summary>
- *     The token service
- * </summary>
- * <remarks>
- *     This class is used to generate and validate tokens
- * </remarks>
- */
+/// <summary>
+///     Service responsible for generating and validating JSON Web Tokens (JWT).
+/// </summary>
+/// <remarks>
+///     Tokens are created using the secret configured in <see cref="TokenSettings" /> and
+///     validated with the same secret. The service returns a serialized JWT string when
+///     generating tokens and the associated user id when validating tokens.
+/// </remarks>
 public class TokenService(IOptions<TokenSettings> tokenSettings) : ITokenService
 {
     private readonly TokenSettings _tokenSettings = tokenSettings.Value;
 
-    /**
-     * <summary>
-     *     Generate token
-     * </summary>
-     * <param name="user">The user for token generation</param>
-     * <returns>The generated Token</returns>
-     */
+    /// <summary>
+    ///     Generates a signed JWT for the specified <paramref name="user"/>.
+    /// </summary>
+    /// <param name="user">User entity for which the token will be generated.</param>
+    /// <returns>A signed JWT serialized as a string.</returns>
     public string GenerateToken(User user)
     {
         var secret = _tokenSettings.Secret;
@@ -49,13 +47,16 @@ public class TokenService(IOptions<TokenSettings> tokenSettings) : ITokenService
         return token;
     }
 
-    /**
-     * <summary>
-     *     VerifyPassword token
-     * </summary>
-     * <param name="token">The token to validate</param>
-     * <returns>The user id if the token is valid, null otherwise</returns>
-     */
+    /// <summary>
+    ///     Validates the provided JWT and extracts the user id claim when validation succeeds.
+    /// </summary>
+    /// <param name="token">The JWT to validate.</param>
+    /// <returns>
+    ///     The user id extracted from the token if validation succeeds; otherwise <c>null</c>.
+    /// </returns>
+    /// <remarks>
+    ///     Validation intentionally returns <c>null</c> for invalid or expired tokens instead of throwing.
+    /// </remarks>
     public async Task<int?> ValidateToken(string token)
     {
         // If token is null or empty

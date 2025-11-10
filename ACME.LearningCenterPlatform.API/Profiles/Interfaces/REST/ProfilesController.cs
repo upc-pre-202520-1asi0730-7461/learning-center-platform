@@ -8,6 +8,12 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace ACME.LearningCenterPlatform.API.Profiles.Interfaces.REST;
 
+/// <summary>
+///     REST API controller exposing profile-related endpoints.
+/// </summary>
+/// <remarks>
+///     Provides endpoints to create and retrieve profile aggregates.
+/// </remarks>
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
@@ -17,6 +23,14 @@ public class ProfilesController(
     IProfileQueryService profileQueryService)
     : ControllerBase
 {
+    /// <summary>
+    ///     Retrieves a profile by its identifier.
+    /// </summary>
+    /// <param name="profileId">The unique identifier of the profile to retrieve.</param>
+    /// <returns>
+    ///     An <see cref="ActionResult"/> containing the <see cref="ProfileResource"/> when found,
+    ///     or <see cref="NotFoundResult"/> when no profile exists with the given id.
+    /// </returns>
     [HttpGet("{profileId:int}")]
     [SwaggerOperation("Get Profile by Id", "Get a profile by its unique identifier.", OperationId = "GetProfileById")]
     [SwaggerResponse(200, "The profile was found and returned.", typeof(ProfileResource))]
@@ -30,6 +44,14 @@ public class ProfilesController(
         return Ok(profileResource);
     }
 
+    /// <summary>
+    ///     Creates a new profile from the provided resource representation.
+    /// </summary>
+    /// <param name="resource">The resource containing profile creation data.</param>
+    /// <returns>
+    ///     A <see cref="CreatedAtActionResult"/> with the created profile resource on success,
+    ///     or <see cref="BadRequestResult"/> when creation fails.
+    /// </returns>
     [HttpPost]
     [SwaggerOperation("Create Profile", "Create a new profile.", OperationId = "CreateProfile")]
     [SwaggerResponse(201, "The profile was created.", typeof(ProfileResource))]
@@ -43,6 +65,10 @@ public class ProfilesController(
         return CreatedAtAction(nameof(GetProfileById), new { profileId = profile.Id }, profileResource);
     }
 
+    /// <summary>
+    ///     Retrieves all profiles available in the system.
+    /// </summary>
+    /// <returns>An <see cref="ActionResult"/> with a collection of <see cref="ProfileResource"/>.</returns>
     [HttpGet]
     [SwaggerOperation("Get All Profiles", "Get all profiles.", OperationId = "GetAllProfiles")]
     [SwaggerResponse(200, "The profiles were found and returned.", typeof(IEnumerable<ProfileResource>))]
