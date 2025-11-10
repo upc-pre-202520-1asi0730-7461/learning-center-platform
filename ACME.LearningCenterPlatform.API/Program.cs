@@ -2,6 +2,7 @@ using ACME.LearningCenterPlatform.API.IAM.Infrastructure.Interfaces.ASP.Configur
 using ACME.LearningCenterPlatform.API.IAM.Infrastructure.Pipeline.Middleware.Extensions;
 using ACME.LearningCenterPlatform.API.Profiles.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 using ACME.LearningCenterPlatform.API.Publishing.Infrastructure.Interfaces.ASP.Configuration;
+using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Documentation.OpenApi.Configuration.Extensions;
 using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Mediator.Cortex.Configuration.Extensions;
@@ -31,53 +32,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
             .LogTo(Console.WriteLine, LogLevel.Error);
 });
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1",
-        new OpenApiInfo
-        {
-            Title = "ACME.LearningCenterPlatform.API",
-            Version = "v1",
-            Description = "ACME Learning Center Platform API",
-            TermsOfService = new Uri("https://acme-learning.com/tos"),
-            Contact = new OpenApiContact
-            {
-                Name = "ACME Studios",
-                Email = "contact@acme.com"
-            },
-            License = new OpenApiLicense
-            {
-                Name = "Apache 2.0",
-                Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
-            }
-        });
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        In = ParameterLocation.Header,
-        Description = "Please enter token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        BearerFormat = "JWT",
-        Scheme = "bearer"
-    });
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Id = "Bearer",
-                    Type = ReferenceType.SecurityScheme
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
-    options.EnableAnnotations();
-});
+// Add Open API Configuration
+builder.AddOpenApiDocumentation();
 
 // Add context-specific services
 builder.AddSharedContextServices();
