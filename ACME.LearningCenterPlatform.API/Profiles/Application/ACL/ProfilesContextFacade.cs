@@ -7,25 +7,26 @@ using ACME.LearningCenterPlatform.API.Profiles.Interfaces.ACL;
 namespace ACME.LearningCenterPlatform.API.Profiles.Application.ACL;
 
 /// <summary>
-/// Facade for the profiles context 
+///     Facade for the profiles context
 /// </summary>
 /// <param name="profileCommandService">
-/// The profile command service
+///     The profile command service
 /// </param>
 /// <param name="profileQueryService">
-/// The profile query service
+///     The profile query service
 /// </param>
 public class ProfilesContextFacade(
     IProfileCommandService profileCommandService,
     IProfileQueryService profileQueryService
-    ) : IProfilesContextFacade
+) : IProfilesContextFacade
 {
-    
     // inheritedDoc
-    public async Task<int> CreateProfile(string firstName, string lastName, string email, string street, string number, string city,
+    public async Task<int> CreateProfile(string firstName, string lastName, string email, string street, string number,
+        string city,
         string postalCode, string country)
     {
-        var createProfileCommand = new CreateProfileCommand(firstName, lastName, email, street, number, city, postalCode, country);
+        var createProfileCommand =
+            new CreateProfileCommand(firstName, lastName, email, street, number, city, postalCode, country);
         var profile = await profileCommandService.Handle(createProfileCommand);
         return profile?.Id ?? 0;
     }

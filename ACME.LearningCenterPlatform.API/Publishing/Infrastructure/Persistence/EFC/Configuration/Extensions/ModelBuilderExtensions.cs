@@ -12,12 +12,12 @@ public static class ModelBuilderExtensions
         builder.Entity<Category>().HasKey(c => c.Id);
         builder.Entity<Category>().Property(c => c.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Category>().Property(c => c.Name).IsRequired().HasMaxLength(30);
-    
+
         builder.Entity<Tutorial>().HasKey(t => t.Id);
         builder.Entity<Tutorial>().Property(t => t.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Tutorial>().Property(t => t.Title).IsRequired().HasMaxLength(50);
         builder.Entity<Tutorial>().Property(t => t.Summary).IsRequired().HasMaxLength(240);
-    
+
         builder.Entity<Asset>().HasDiscriminator(a => a.Type);
         builder.Entity<Asset>().HasKey(a => a.Id);
         builder.Entity<Asset>().HasDiscriminator<string>("asset_type")
@@ -25,7 +25,7 @@ public static class ModelBuilderExtensions
             .HasValue<ImageAsset>("asset_image")
             .HasValue<VideoAsset>("asset_video")
             .HasValue<ReadableContentAsset>("asset_readable_content");
-    
+
         builder.Entity<Asset>().OwnsOne(i => i.AssetIdentifier, ai =>
         {
             ai.WithOwner().HasForeignKey("Id");
@@ -33,8 +33,7 @@ public static class ModelBuilderExtensions
         });
         builder.Entity<ImageAsset>().Property(p => p.ImageUri).IsRequired();
         builder.Entity<VideoAsset>().Property(p => p.VideoUri).IsRequired();
-    
+
         builder.Entity<Tutorial>().HasMany(t => t.Assets);
-    
     }
 }

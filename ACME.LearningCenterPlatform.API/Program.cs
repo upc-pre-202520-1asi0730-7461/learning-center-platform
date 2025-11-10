@@ -35,7 +35,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(options =>
 {
-    
     options.SwaggerDoc("v1",
         new OpenApiInfo
         {

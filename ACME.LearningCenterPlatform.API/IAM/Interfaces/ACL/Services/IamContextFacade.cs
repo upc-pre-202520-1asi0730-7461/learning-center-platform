@@ -4,7 +4,8 @@ using ACME.LearningCenterPlatform.API.IAM.Domain.Services;
 
 namespace ACME.LearningCenterPlatform.API.IAM.Interfaces.ACL.Services;
 
-public class IamContextFacade(IUserCommandService userCommandService, IUserQueryService userQueryService) : IIamContextFacade
+public class IamContextFacade(IUserCommandService userCommandService, IUserQueryService userQueryService)
+    : IIamContextFacade
 {
     public async Task<int> CreateUser(string username, string password)
     {

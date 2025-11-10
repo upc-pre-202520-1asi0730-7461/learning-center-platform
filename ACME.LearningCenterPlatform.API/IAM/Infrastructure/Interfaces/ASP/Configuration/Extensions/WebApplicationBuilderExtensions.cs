@@ -10,7 +10,6 @@ using ACME.LearningCenterPlatform.API.IAM.Infrastructure.Tokens.JWT.Services;
 using ACME.LearningCenterPlatform.API.IAM.Interfaces.ACL;
 using ACME.LearningCenterPlatform.API.IAM.Interfaces.ACL.Services;
 
-
 namespace ACME.LearningCenterPlatform.API.IAM.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 
 public static class WebApplicationBuilderExtensions
@@ -29,7 +28,6 @@ public static class WebApplicationBuilderExtensions
         builder.Services.AddScoped<ITokenService, TokenService>();
         builder.Services.AddScoped<IHashingService, HashingService>();
         builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
-
     }
 
     public static void AddCorsPolicy(this WebApplicationBuilder builder)
@@ -41,7 +39,6 @@ public static class WebApplicationBuilderExtensions
                 policy => policy.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
-        });    
+        });
     }
-    
 }

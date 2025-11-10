@@ -3,12 +3,12 @@ using Humanizer;
 namespace ACME.LearningCenterPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 
 /// <summary>
-/// Provides extension methods for string manipulation related to database naming conventions.
+///     Provides extension methods for string manipulation related to database naming conventions.
 /// </summary>
 public static class StringExtensions
 {
     /// <summary>
-    /// Converts a string to snake_case.
+    ///     Converts a string to snake_case.
     /// </summary>
     /// <param name="text">The string to convert.</param>
     /// <returns>The string in snake_case.</returns>
@@ -34,7 +34,7 @@ public static class StringExtensions
     }
 
     /// <summary>
-    /// Converts a string to its plural form.
+    ///     Converts a string to its plural form.
     /// </summary>
     /// <param name="text">The string to pluralize.</param>
     /// <returns>The pluralized string.</returns>

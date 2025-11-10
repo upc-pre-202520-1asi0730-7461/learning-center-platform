@@ -10,7 +10,7 @@ public partial class Asset(EAssetType type) : IPublishable
     public EAssetType Type { get; private set; } = type;
     public virtual bool Readable => false;
     public virtual bool Viewable => false;
-    
+
     public void SendToEdit()
     {
         Status = EPublishingStatus.ReadyToEdit;

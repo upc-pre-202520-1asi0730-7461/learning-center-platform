@@ -6,10 +6,10 @@ using ACME.LearningCenterPlatform.API.Profiles.Domain.Services;
 namespace ACME.LearningCenterPlatform.API.Profiles.Application.Internal.QueryServices;
 
 /// <summary>
-/// Profile query service 
+///     Profile query service
 /// </summary>
 /// <param name="profileRepository">
-/// Profile repository
+///     Profile repository
 /// </param>
 public class ProfileQueryService(IProfileRepository profileRepository) : IProfileQueryService
 {

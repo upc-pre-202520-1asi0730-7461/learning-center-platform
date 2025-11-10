@@ -7,17 +7,17 @@ using ACME.LearningCenterPlatform.API.Shared.Domain.Repositories;
 namespace ACME.LearningCenterPlatform.API.Profiles.Application.Internal.CommandServices;
 
 /// <summary>
-/// Profile command service 
+///     Profile command service
 /// </summary>
 /// <param name="profileRepository">
-/// Profile repository
+///     Profile repository
 /// </param>
 /// <param name="unitOfWork">
-/// Unit of work
+///     Unit of work
 /// </param>
 public class ProfileCommandService(
-    IProfileRepository profileRepository, 
-    IUnitOfWork unitOfWork) 
+    IProfileRepository profileRepository,
+    IUnitOfWork unitOfWork)
     : IProfileCommandService
 {
     /// <inheritdoc />
@@ -29,7 +29,8 @@ public class ProfileCommandService(
             await profileRepository.AddAsync(profile);
             await unitOfWork.CompleteAsync();
             return profile;
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             // Log error
             return null;

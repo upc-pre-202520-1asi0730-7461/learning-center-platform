@@ -12,12 +12,11 @@ public static class WebApplicationBuilderExtensions
 
         // Add Cortex Mediator for Event Handling
         builder.Services.AddCortexMediator(
-            configuration: builder.Configuration,
-            handlerAssemblyMarkerTypes: [typeof(Program)], configure: options =>
+            builder.Configuration,
+            [typeof(Program)], options =>
             {
                 options.AddOpenCommandPipelineBehavior(typeof(LoggingCommandBehavior<>));
                 //options.AddDefaultBehaviors();
             });
-        
     }
 }

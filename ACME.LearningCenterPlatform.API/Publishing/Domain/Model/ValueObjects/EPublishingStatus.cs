@@ -1,7 +1,7 @@
 namespace ACME.LearningCenterPlatform.API.Publishing.Domain.Model.ValueObjects;
 
 /// <summary>
-/// Publishing Status Enumeration
+///     Publishing Status Enumeration
 /// </summary>
 public enum EPublishingStatus
 {

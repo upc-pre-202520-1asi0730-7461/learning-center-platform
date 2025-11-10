@@ -7,12 +7,12 @@ using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Persistence.EFC.Repo
 namespace ACME.LearningCenterPlatform.API.Profiles.Infrastructure.Persistence.EFC.Repositories;
 
 /// <summary>
-/// Profile repository implementation  
+///     Profile repository implementation
 /// </summary>
 /// <param name="context">
-/// The database context
+///     The database context
 /// </param>
-public class ProfileRepository(AppDbContext context) 
+public class ProfileRepository(AppDbContext context)
     : BaseRepository<Profile>(context), IProfileRepository
 {
     /// <inheritdoc />

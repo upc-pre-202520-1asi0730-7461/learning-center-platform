@@ -36,6 +36,7 @@ public class RequestAuthorizationMiddleware(RequestDelegate next)
             await next(context);
             return;
         }
+
         Console.WriteLine("Entering authorization");
         // get token from request header
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();

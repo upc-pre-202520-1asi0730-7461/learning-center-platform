@@ -18,9 +18,12 @@ namespace ACME.LearningCenterPlatform.API.Publishing.Application.Internal.Comman
 ///     The <see cref="IUnitOfWork" /> to use.
 /// </param>
 /// <param name="domainEventPublisher">
-///   The <see cref="IMediator" /> to use for publishing domain events.
+///     The <see cref="IMediator" /> to use for publishing domain events.
 /// </param>
-public class CategoryCommandService(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork, IMediator domainEventPublisher)
+public class CategoryCommandService(
+    ICategoryRepository categoryRepository,
+    IUnitOfWork unitOfWork,
+    IMediator domainEventPublisher)
     : ICategoryCommandService
 {
     /// <inheritdoc />
@@ -29,10 +32,10 @@ public class CategoryCommandService(ICategoryRepository categoryRepository, IUni
         var category = new Category(command);
         await categoryRepository.AddAsync(category);
         await unitOfWork.CompleteAsync();
-        
+
         // Publish the domain event after the category is created
         await domainEventPublisher.PublishAsync(new CategoryCreatedEvent(category.Name));
-        
+
         // Return the created category
         return category;
     }

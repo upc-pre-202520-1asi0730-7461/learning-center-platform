@@ -1,6 +1,4 @@
 using ACME.LearningCenterPlatform.API.Profiles.Domain.Model.Aggregates;
-using ACME.LearningCenterPlatform.API.Publishing.Domain.Model.Aggregate;
-using ACME.LearningCenterPlatform.API.Publishing.Domain.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ACME.LearningCenterPlatform.API.Profiles.Infrastructure.Persistence.EFC.Configuration.Extensions;
