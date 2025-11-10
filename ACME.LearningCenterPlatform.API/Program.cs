@@ -1,3 +1,5 @@
+using ACME.LearningCenterPlatform.API.IAM.Infrastructure.Interfaces.ASP.Configuration.Extensions;
+using ACME.LearningCenterPlatform.API.IAM.Infrastructure.Pipeline.Middleware.Extensions;
 using ACME.LearningCenterPlatform.API.Profiles.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 using ACME.LearningCenterPlatform.API.Publishing.Infrastructure.Interfaces.ASP.Configuration;
 using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Interfaces.ASP.Configuration;
@@ -52,6 +54,29 @@ builder.Services.AddSwaggerGen(options =>
                 Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
             }
         });
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "bearer"
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
     options.EnableAnnotations();
 });
 
@@ -59,10 +84,13 @@ builder.Services.AddSwaggerGen(options =>
 builder.AddSharedContextServices();
 builder.AddPublishingContextServices();
 builder.AddProfilesContextServices();
+builder.AddIamContextServices();
 
 // Mediator Configuration
 builder.AddCortexConfigurationServices();
 
+// CORS Configuration
+builder.AddCorsPolicy();
 
 var app = builder.Build();
 
@@ -82,6 +110,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Apply CORS Policy
+app.UseCors("AllowAllPolicy");
+
+// Add Authorization Middleware to Pipeline
+app.UseRequestAuthorization();
 
 app.UseHttpsRedirection();
 
