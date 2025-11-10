@@ -19,7 +19,7 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     /// Initializes a new instance of the <see cref="BaseRepository{TEntity}"/> class.
     /// </summary>
     /// <param name="context">The database context.</param>
-    public BaseRepository(AppDbContext context)
+    private protected BaseRepository(AppDbContext context)
     {
         Context = context;
     }
