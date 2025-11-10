@@ -1,3 +1,4 @@
+using ACME.LearningCenterPlatform.API.IAM.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using ACME.LearningCenterPlatform.API.Profiles.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using ACME.LearningCenterPlatform.API.Publishing.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using ACME.LearningCenterPlatform.API.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
@@ -14,7 +15,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
     /// <summary>
     /// Configures the database context options, adding the created and updated date interceptor.
     /// </summary>
-    /// <param name="builder">The options builder to configure.</param>
+    /// <param name="builder">The option builder to configure.</param>
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
         // Add the created and updated interceptor
@@ -31,6 +32,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         base.OnModelCreating(builder);
         builder.ApplyPublishingConfiguration();
         builder.ApplyProfilesConfiguration();
+        builder.ApplyIamConfiguration();
         builder.UseSnakeCaseNamingConvention();
     }
 }
